@@ -9,7 +9,7 @@ const BOOT: Line[] = [
   { cls: "t-cmd", text: "./about.sh", prompt: true },
   { cls: "t-out", text: "" },
   { cls: "t-accent", text: "  Hi, I'm Georgia!" },
-  { cls: "t-out", text: "  Aspiring Front-end developer from Trinidad & Tobago." },
+  { cls: "t-out", text: "  Aspiring Software Engineer from Trinidad & Tobago." },
   { cls: "t-out", text: "  I love building things, music," },
   { cls: "t-out", text: "  working out, and coffee." },
   { cls: "t-out", text: "" },
@@ -64,13 +64,17 @@ export default function Terminal() {
     help: () => [
       "  help      — this list",
       "  whoami    — who am I",
-      "  about   — open About",
+      "  about     — open About",
       "  projects  — open Projects",
-      "  spotify     — open Spotify",
+      "  spotify   — open Spotify",
       "  contact   — open Mail",
       "  clear     — clear screen",
     ],
-    whoami: () => ["  Aspiring Software Engineer. Coffee Addict. Taylor Swift Fanatic."],
+    whoami: () => ["  Aspiring Software Engineer/ Web Developer. Coffee Addict. Taylor Swift Fan."],
+    about: () => {
+      open("aboutme");
+      return ["  Opening About…"];
+    },
     projects: () => {
       open("proj");
       return ["  Opening Projects…"];
@@ -78,10 +82,6 @@ export default function Terminal() {
     spotify: () => {
       open("music");
       return ["  Opening Music… "];
-    },
-    photos: () => {
-      open("photos");
-      return ["  Opening Photos…"];
     },
     contact: () => {
       open("mail");
