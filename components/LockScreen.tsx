@@ -25,7 +25,7 @@ export default function LockScreen({
       <div className="clock">{now ? fmtTime(now).short : "\u00A0"}</div>
       <div className="date">{now ? fmtDate(now) : "\u00A0"}</div>
       <div className="avatar">
-        <img src="/grad.jpg" alt="Georgia" />
+        <img src="/Grad.jpg" alt="Georgia" />
       </div>
       <div className="name">Georgia Ng Wai</div>
       <div className="hint">Click or press Enter to unlock</div>

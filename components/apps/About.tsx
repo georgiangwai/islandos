@@ -13,7 +13,7 @@ const SECTIONS = [
         home. 
       </>
     ),
-    img: "/photos/one.jpg",
+    img: "/photos/one.JPG",
     side: "right",
   },
   {
@@ -33,7 +33,7 @@ const SECTIONS = [
         My main ones are going to the gym, running, reading and playing the guitar.  
       </>
     ),
-    img: "/photos/three.jpg",
+    img: "/photos/three.JPG",
     side: "right",
   },
   {
@@ -43,7 +43,7 @@ const SECTIONS = [
         I&apos;m always looking for ways to improve myself and the world around me.
       </>
     ),
-    img: "/photos/four.jpg",
+    img: "/photos/four.JPG",
     side: "left",
   },
 ];
