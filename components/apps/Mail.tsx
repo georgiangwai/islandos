@@ -4,9 +4,30 @@ import { useState } from "react";
 
 const ME = { name: "Georgia", email: "georgiangwai@gmail.com" };
 
-// Get this from formspree.io: create a form pointed at your email,
-// then paste its ID here (the part after /f/ in the endpoint URL).
 const FORMSPREE_ID = "mojgajrj";
+
+const TEMPLATES = [
+  {
+    label: "💼 I have a role for you",
+    subject: "Role opportunity — let's talk",
+    body: "Hi Georgia! I came across your portfolio and think you'd be a great fit for a role at ___. Here's the posting: ___. Would love to set up a chat!",
+  },
+  {
+    label: "🤝 Let's collaborate",
+    subject: "Collab idea",
+    body: "Hey Georgia! I'm working on ___ and think we could build something cool together. Interested?",
+  },
+  {
+    label: "👋 Just saying hi",
+    subject: "Loved the portfolio",
+    body: "Hi Georgia — clicked around IslandOS and had to say: ___ was my favorite part. Keep building!",
+  },
+  {
+    label: "☕ Coffee chat",
+    subject: "Quick chat?",
+    body: "Hey Georgia! I'd love to pick your brain about ___ — got 15 minutes sometime this week?",
+  },
+];
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -61,6 +82,29 @@ export default function Mail() {
           ➤ {sendLabel}
         </button>
         <span className="mail-newmsg">New Message</span>
+      </div>
+      <div className="mail-templates">
+        <span className="mail-templates-hint">Not sure what to say? Start with one:</span>
+        {TEMPLATES.map((t) => (
+          <button
+            key={t.label}
+            className="mail-template-chip"
+            onClick={() => {
+              setSubject(t.subject);
+              setBody(t.body);
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
+        <a
+          className="mail-template-chip"
+          href="https://linkedin.com/in/georgiangwai"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          in&nbsp;LinkedIn
+        </a>
       </div>
 
       <div className="mail-field">
