@@ -4,36 +4,61 @@ import { useState } from "react";
 
 const ME = { name: "Georgia", email: "georgiangwai@gmail.com" };
 
+// Get this from formspree.io: create a form pointed at your email,
+// then paste its ID here (the part after /f/ in the endpoint URL).
+const FORMSPREE_ID = "mojgajrj";
+
+type Status = "idle" | "sending" | "sent" | "error";
+
 export default function Mail() {
   const [from, setFrom] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  const send = () => {
-    // Level 1: opens the visitor's mail app with everything pre-filled
-    const url =
-      `mailto:${ME.email}` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body + (from ? `\n\nFrom: ${from}` : ""))}`;
-    window.location.href = url;
+  const send = async () => {
+    if (!FORMSPREE_ID) {
+      // Fallback: opens the visitor's mail app with everything pre-filled
+      const url =
+        `mailto:${ME.email}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body + (from ? `\n\nFrom: ${from}` : ""))}`;
+      window.location.href = url;
+      setStatus("sent");
+      setTimeout(() => setStatus("idle"), 2500);
+      return;
+    }
 
-    // Level 2 (replace the two lines above once you have a Formspree ID):
-    // await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email: from, subject, message: body }),
-    // });
-
-    setSent(true);
-    setTimeout(() => setSent(false), 2500);
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email: from, subject, message: body }),
+      });
+      if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+      setStatus("sent");
+      setFrom("");
+      setSubject("");
+      setBody("");
+    } catch {
+      setStatus("error");
+    }
+    setTimeout(() => setStatus("idle"), 2500);
   };
+
+  const sendLabel = {
+    idle: "Send",
+    sending: "Sending…",
+    sent: FORMSPREE_ID ? "Sent ✓" : "Opening…",
+    error: "Failed — try again",
+  }[status];
 
   return (
     <div className="mail-app">
       <div className="mail-toolbar">
-        <button className="mail-send" onClick={send}>
-          ➤ {sent ? "Opening…" : "Send"}
+        <button className="mail-send" onClick={send} disabled={status === "sending"}>
+          ➤ {sendLabel}
         </button>
         <span className="mail-newmsg">New Message</span>
       </div>
