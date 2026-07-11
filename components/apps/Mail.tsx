@@ -36,7 +36,6 @@ export default function Mail() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [status, setStatus] = useState<Status>("idle");
-  const [copied, setCopied] = useState(false);
 
   const send = async () => {
     if (!FORMSPREE_ID) {
@@ -139,16 +138,6 @@ export default function Mail() {
       </div>
 
       <div className="mail-footer">
-        <button
-          className="mail-chip"
-          onClick={() => {
-            navigator.clipboard.writeText(ME.email);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1500);
-          }}
-        >
-          ✉ {copied ? "Copied!" : ME.email}
-        </button>
         <a href="https://linkedin.com/in/georgia-ngwai" target="_blank" rel="noopener noreferrer" className="mail-chip">
           in linkedin.com/in/georgia-ngwai
         </a>
