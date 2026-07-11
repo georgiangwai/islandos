@@ -99,7 +99,7 @@ export default function Mail() {
         ))}
         <a
           className="mail-template-chip"
-          href="https://linkedin.com/in/georgiangwai"
+          href="https://linkedin.com/in/georgia-ngwai"
           target="_blank"
           rel="noopener noreferrer"
         >
