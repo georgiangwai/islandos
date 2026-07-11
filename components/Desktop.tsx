@@ -27,7 +27,7 @@ export default function Desktop() {
         <div className="desk-hint">
           <b>Welcome to IslandOS.</b>
           <br />
-          Open apps from the dock below. Windows drag like the real thing. 🎧
+          Open apps from the dock below. Windows drag, expand and minimize like the real thing. 
         </div>
         {APPS.map((a) => (
           <Window key={a.id} app={a} />
