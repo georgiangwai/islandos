@@ -70,8 +70,8 @@ export const APPS: AppDef[] = [
     icon: "/icons/Mail.png",
     iconClass: "ic-mail",
     component: Mail,
-    initial: { x: 260, y: 180 },
-    width: 520,
-    height: 500,
+    initial: { x: 260, y: 110 },
+    width: 560,
+    height: 620,
   },
 ];

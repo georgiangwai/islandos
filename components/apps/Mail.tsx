@@ -36,6 +36,7 @@ export default function Mail() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [copied, setCopied] = useState(false);
 
   const send = async () => {
     if (!FORMSPREE_ID) {
@@ -83,30 +84,6 @@ export default function Mail() {
         </button>
         <span className="mail-newmsg">New Message</span>
       </div>
-      <div className="mail-templates">
-        <span className="mail-templates-hint">Not sure what to say? Start with one:</span>
-        {TEMPLATES.map((t) => (
-          <button
-            key={t.label}
-            className="mail-template-chip"
-            onClick={() => {
-              setSubject(t.subject);
-              setBody(t.body);
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
-        <a
-          className="mail-template-chip"
-          href="https://linkedin.com/in/georgia-ngwai"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          in&nbsp;LinkedIn
-        </a>
-      </div>
-
       <div className="mail-field">
         <label>To:</label>
         <span className="mail-to">
@@ -135,15 +112,46 @@ export default function Mail() {
         />
       </div>
 
-      <textarea
-        className="mail-body"
-        placeholder="Write your message…"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-      />
+      <div className="mail-bodywrap">
+        <textarea
+          className="mail-body"
+          placeholder="Write your message…"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+        />
+        {!body && (
+          <div className="mail-templates">
+            <span className="mail-templates-hint">Not sure what to say? Start with one:</span>
+            {TEMPLATES.map((t) => (
+              <button
+                key={t.label}
+                className="mail-template-chip"
+                onClick={() => {
+                  setSubject(t.subject);
+                  setBody(t.body);
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="mail-footer">
-        <a href={`mailto:${ME.email}`} className="mail-chip">✉ {ME.email}</a>
+        <button
+          className="mail-chip"
+          onClick={() => {
+            navigator.clipboard.writeText(ME.email);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+          }}
+        >
+          ✉ {copied ? "Copied!" : ME.email}
+        </button>
+        <a href="https://linkedin.com/in/georgia-ngwai" target="_blank" rel="noopener noreferrer" className="mail-chip">
+          in linkedin.com/in/georgia-ngwai
+        </a>
         <a href="https://github.com/georgiangwai" target="_blank" rel="noopener noreferrer" className="mail-chip">
           ⌘ github.com/georgiangwai
         </a>
