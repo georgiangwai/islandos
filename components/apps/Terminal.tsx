@@ -9,7 +9,7 @@ const BOOT: Line[] = [
   { cls: "t-cmd", text: "./about.sh", prompt: true },
   { cls: "t-out", text: "" },
   { cls: "t-accent", text: "  Hi, I'm Georgia!" },
-  { cls: "t-out", text: "  Aspiring Software Engineer from Trinidad & Tobago." },
+  { cls: "t-out", text: "  Aspiring Software Engineer, originally from Trinidad & Tobago, living in the US." },
   { cls: "t-out", text: "  I love building things, music," },
   { cls: "t-out", text: "  working out, and coffee." },
   { cls: "t-out", text: "" },
