@@ -47,16 +47,20 @@ export async function GET() {
       return NextResponse.json({ isPlaying: false });
     }
 
-    return NextResponse.json({
-      isPlaying: song.is_playing,
-      title: song.item.name,
-      artist: song.item.artists.map((a: any) => a.name).join(", "),
-      album: song.item.album.name,
-      albumArt: song.item.album.images?.[1]?.url ?? song.item.album.images?.[0]?.url ?? null,
-      url: song.item.external_urls.spotify,
-      progressMs: song.progress_ms,
-      durationMs: song.item.duration_ms,
-    });
+    return NextResponse.json(
+      {
+        isPlaying: song.is_playing,
+        title: song.item.name,
+        artist: song.item.artists.map((a: any) => a.name).join(", "),
+        album: song.item.album.name,
+        albumArt: song.item.album.images?.[1]?.url ?? song.item.album.images?.[0]?.url ?? null,
+        url: song.item.external_urls.spotify,
+        progressMs: song.progress_ms,
+        durationMs: song.item.duration_ms,
+      },
+      // CDN caches for 15s: request floods collapse to ~1 Spotify call per 15s
+      { headers: { "Cache-Control": "public, s-maxage=15, stale-while-revalidate=30" } }
+    );
   } catch {
     return NextResponse.json({ isPlaying: false });
   }
