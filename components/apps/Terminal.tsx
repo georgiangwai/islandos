@@ -11,7 +11,7 @@ const BOOT: Line[] = [
   { cls: "t-accent", text: "  Hi, I'm Georgia!" },
   { cls: "t-out", text: "  Aspiring Software Engineer, originally from Trinidad & Tobago, living in the US." },
   { cls: "t-out", text: "  I love building things, music," },
-  { cls: "t-out", text: "  working out, and coffee." },
+  { cls: "t-out", text: "  working out, and traveling." },
   { cls: "t-out", text: "" },
   { cls: "t-out", text: "  Type `help` to see commands." },
   { cls: "t-out", text: "" },
