@@ -3,7 +3,7 @@ import "./globals.css";
 import "./islandos.css";
 
 export const metadata: Metadata = {
-  title: "IslandOS — Georgia",
+  title: "Georgia's Portfolio",
   description: "A macOS-inspired portfolio website",
 };
 
